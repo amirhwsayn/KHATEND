@@ -1,0 +1,1 @@
+web: gunicorn KHATEND.wsgi --log-file -
