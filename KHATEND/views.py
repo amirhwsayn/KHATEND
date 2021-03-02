@@ -55,9 +55,8 @@ class CreateTeacher(APIView):
             return errorBuild('کد وارد شده نا معتبر است')
 
 
-class test(generics.ListAPIView):
-    queryset = Teacher.objects.filter(Teacher_Id='asdadasd')
-
+class test(generics.ListCreateAPIView):
+    queryset = Teacher.objects.filter(Teacher_Id='asdasdasdasd')
     serializer_class = Serializer_Teacher
 
 

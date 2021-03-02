@@ -11,7 +11,7 @@ class Teacher(models.Model):
     Teacher_Email = models.EmailField(unique=True)
     Teacher_Name = models.CharField(max_length=50, default=Random_Name)
     Teacher_Description = models.TextField(max_length=300, blank=True)
-    Teacher_ProfileImage = models.FileField(upload_to='image/', blank=True)
+    Teacher_ProfileImage = models.FileField(upload_to='image/', blank=True, default='image/iconfinder_1041_boy_c_2400506.png')
     Teacher_CreateDate = models.DateTimeField(auto_now=True)
 
 
