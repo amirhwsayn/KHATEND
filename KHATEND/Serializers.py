@@ -13,10 +13,10 @@ class Serializer_Teacher(serializers.ModelSerializer):
             'Teacher_Email',
             'Teacher_Name',
             'Teacher_Description',
-            'Teacher_ProfileImage',
+            # 'Teacher_ProfileImage',
             'Teacher_CreateDate',
         )
-        read_only_fields = ('Teacher_Token', 'Teacher_CreatDate',)
+        # read_only_fields = ('Teacher_Token', 'Teacher_CreateDate',)
 
 
 class Serializer_Token(serializers.ModelSerializer):

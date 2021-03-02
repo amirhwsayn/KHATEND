@@ -6,7 +6,7 @@ def Random_Token():
 
 
 def Random_Name():
-    return get_random_string(5)
+    return f'User{get_random_string(5 ,"1234567890")}'
 
 
 def Random_Code():
