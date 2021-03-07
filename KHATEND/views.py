@@ -60,13 +60,14 @@ class LoginTeacher(generics.ListAPIView):
     serializer_class = Serializer_Teacher
 
     def get_queryset(self):
-        return Teacher.objects.filter(Teacher_Id=self.request.data['id'], Teacher_Password=self.request.data['password'])
+        return Teacher.objects.filter(Teacher_Id=self.request.data['id'],
+                                      Teacher_Password=self.request.data['password'])
 
-    def handle_exception(self, exc):
-        if isinstance(exc, exceptions.NotAuthenticated):
-            return errorBuild("در خواست نا معتبر")
-        if isinstance(exc,ObjectDoesNotExist):
-            return errorBuild("رمز عبور یا نام کاربری اشتباه وارد شده")
+    # def handle_exception(self, exc):
+    #     if isinstance(exc, exceptions.NotAuthenticated):
+    #         return errorBuild("در خواست نا معتبر")
+    #     if isinstance(exc, ObjectDoesNotExist):
+    #         return errorBuild("رمز عبور یا نام کاربری اشتباه وارد شده")
 
 
 class test(generics.ListCreateAPIView):
