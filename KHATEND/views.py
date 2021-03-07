@@ -1,13 +1,13 @@
-from django.db.models import ObjectDoesNotExist
+from django.core.exceptions import ObjectDoesNotExist
 from django.urls import path
 from rest_framework import generics, status, exceptions
 from rest_framework.response import Response
+from rest_framework.views import APIView
 
 from .Functions import errorBuild, SendMail
+from .Permissons import PERM_CreateTecher, PERM_LoginTeacher
 from .Serializers import Serializer_Token, Serializer_Teacher
 from .models import Teacher, Token
-from .Permissons import PERM_CreateTecher
-from rest_framework.views import APIView
 
 
 # Create your views here.
@@ -55,6 +55,20 @@ class CreateTeacher(APIView):
             return errorBuild('کد وارد شده نا معتبر است')
 
 
+class LoginTeacher(generics.ListAPIView):
+    permission_classes = [PERM_LoginTeacher]
+    serializer_class = Serializer_Teacher
+
+    def get_queryset(self):
+        return Teacher.objects.filter(Teacher_Id=self.request.data['id'], Teacher_Password=self.request.data['password'])
+
+    def handle_exception(self, exc):
+        if isinstance(exc, exceptions.NotAuthenticated):
+            return errorBuild("در خواست نا معتبر")
+        if isinstance(exc,ObjectDoesNotExist):
+            return errorBuild("رمز عبور یا نام کاربری اشتباه وارد شده")
+
+
 class test(generics.ListCreateAPIView):
     queryset = Teacher.objects.filter(Teacher_Id='asdasdasdasd')
     serializer_class = Serializer_Teacher
@@ -63,5 +77,6 @@ class test(generics.ListCreateAPIView):
 urls = [
     path('ct', CreatToken.as_view()),
     path('rt', CreateTeacher.as_view()),
+    path('lg', LoginTeacher.as_view()),
     path('test', test.as_view())
 ]

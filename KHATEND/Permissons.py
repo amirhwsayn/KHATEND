@@ -25,3 +25,11 @@ class PERM_CreateTecher(permissions.BasePermission):
                 return False
         else:
             return False
+
+
+class PERM_LoginTeacher(permissions.BasePermission):
+    def has_permission(self, request, view):
+        if 'id' in request.data and 'password' in request.data:
+            return True
+        else:
+            return False
